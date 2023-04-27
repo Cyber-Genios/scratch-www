@@ -229,7 +229,7 @@
     },
     {
         "name": "projects",
-        "pattern": "^/projects(/editor|(/\\d+(/editor|/fullscreen)?)?)?/?(\\?.*)?$",
+        "pattern": "^/projects(/editor|(/\\w+(/editor|/fullscreen)?)?)?/?(\\?.*)?$",
         "routeAlias": "/projects/?$",
         "view": "preview/preview",
         "title": "Scratch Project",
@@ -237,7 +237,7 @@
     },
     {
         "name": "embed",
-        "pattern": "^/projects/\\d+/embed/?(\\?.*)?$",
+        "pattern": "^/projects/\\w+/embed/?(\\?.*)?$",
         "routeAlias": "/projects/?$",
         "view": "preview/embed",
         "title": "Scratch Project",

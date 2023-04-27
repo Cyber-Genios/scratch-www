@@ -53,34 +53,36 @@ const getReplies = (projectId, commentIds, offset, ownerUsername, isAdmin, token
 
 const getTopLevelComments = (id, offset, ownerUsername, isAdmin, token) => (dispatch => {
     dispatch(setFetchStatus('comments', Status.FETCHING));
-    api({
-        uri: `${isAdmin ? '/admin' : `/users/${ownerUsername}`}/projects/${id}/comments`,
-        authentication: token ? token : null,
-        params: {offset: offset || 0, limit: COMMENT_LIMIT}
-    }, (err, body, res) => {
-        if (err) {
-            dispatch(setFetchStatus('comments', Status.ERROR));
-            dispatch(setError(err));
-            return;
-        }
-        if (typeof body === 'undefined' || res.statusCode >= 400) { // NotFound
-            dispatch(setFetchStatus('comments', Status.ERROR));
-            dispatch(setError('No comment info'));
-            return;
-        }
-        dispatch(setFetchStatus('comments', Status.FETCHED));
-        dispatch(setComments(body));
-        const commentsWithReplies = body.filter(comment => comment.reply_count > 0);
-        if (commentsWithReplies.length > 0) {
-            dispatch(getReplies(id, commentsWithReplies.map(comment => comment.id), 0, ownerUsername, isAdmin, token));
-        }
-        // If we loaded a full page of comments, assume there are more to load.
-        // This will be wrong (1 / COMMENT_LIMIT) of the time, but does not require
-        // any more server query complexity, so seems worth it. In the case of a project with
-        // number of comments divisible by the COMMENT_LIMIT, the load more button will be
-        // clickable, but upon clicking it will go away.
-        dispatch(setMoreCommentsToLoad(body.length === COMMENT_LIMIT));
-    });
+    // api({
+    //     uri: `${isAdmin ? '/admin' : `/users/${ownerUsername}`}/projects/${id}/comments`,
+    //     authentication: token ? token : null,
+    //     params: {offset: offset || 0, limit: COMMENT_LIMIT}
+    // }, (err, body, res) => {
+    //     if (err) {
+    //         dispatch(setFetchStatus('comments', Status.ERROR));
+    //         dispatch(setError(err));
+    //         return;
+    //     }
+    //     if (typeof body === 'undefined' || res.statusCode >= 400) { // NotFound
+    //         dispatch(setFetchStatus('comments', Status.ERROR));
+    //         dispatch(setError('No comment info'));
+    //         return;
+    //     }
+    //     dispatch(setFetchStatus('comments', Status.FETCHED));
+    //     dispatch(setComments(body));
+    //     const commentsWithReplies = body.filter(comment => comment.reply_count > 0);
+    //     if (commentsWithReplies.length > 0) {
+    //         dispatch(getReplies(id, commentsWithReplies.map(comment => comment.id), 0, ownerUsername, isAdmin, token));
+    //     }
+    //     // If we loaded a full page of comments, assume there are more to load.
+    //     // This will be wrong (1 / COMMENT_LIMIT) of the time, but does not require
+    //     // any more server query complexity, so seems worth it. In the case of a project with
+    //     // number of comments divisible by the COMMENT_LIMIT, the load more button will be
+    //     // clickable, but upon clicking it will go away.
+    //     dispatch(setMoreCommentsToLoad(body.length === COMMENT_LIMIT));
+    // });
+    dispatch(setFetchStatus('comments', Status.FETCHED));
+    dispatch(setComments([]));
 });
 
 const getCommentById = (projectId, commentId, ownerUsername, isAdmin, token) => (dispatch => {

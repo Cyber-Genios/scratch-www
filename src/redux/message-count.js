@@ -47,16 +47,19 @@ module.exports.setStatus = status => ({
 });
 
 module.exports.getCount = username => (dispatch => {
-    api({
-        method: 'get',
-        uri: `/users/${username}/messages/count`
-    }, (err, body) => {
-        if (err) {
-            dispatch(module.exports.setCount(0));
-            dispatch(module.exports.setSessionError(err));
-            return;
-        }
-        const count = parseInt(body.count, 10);
-        dispatch(module.exports.setCount(count));
-    });
+    // api({
+    //     method: 'get',
+    //     uri: `/users/${username}/messages/count`
+    // }, (err, body) => {
+    //     if (err) {
+    //         dispatch(module.exports.setCount(0));
+    //         dispatch(module.exports.setSessionError(err));
+    //         return;
+    //     }
+    //     const count = parseInt(body.count, 10);
+    //     dispatch(module.exports.setCount(count));
+    // });
+    const body = {count: 0};
+    const count = parseInt(body.count, 10);
+    dispatch(module.exports.setCount(count));
 });

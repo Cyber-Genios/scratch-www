@@ -135,7 +135,7 @@ class Preview extends React.Component {
         this.addEventListeners();
     }
     componentDidUpdate (prevProps, prevState) {
-        if (this.state.projectId > 0 &&
+        if (this.state.projectId &&
             ((this.props.sessionStatus !== prevProps.sessionStatus &&
             this.props.sessionStatus === sessionActions.Status.FETCHED) ||
             (this.state.projectId !== prevState.projectId))) {
@@ -242,8 +242,8 @@ class Preview extends React.Component {
             // If we set json:true then the body is double-stringified, so don't
             headers: {
                 'Content-Type': 'application/json'
-            },
-            withCredentials: true
+            }
+            // withcredentials: true
         };
         const creatingProject = projectId === null || typeof projectId === 'undefined';
         const queryParams = {};
@@ -256,18 +256,18 @@ class Preview extends React.Component {
         if (creatingProject) {
             Object.assign(opts, {
                 method: 'post',
-                url: `${this.props.projectHost}/${qs}`
+                url: `${this.props.projectHost}/projects`
             });
         } else {
             Object.assign(opts, {
                 method: 'put',
-                url: `${this.props.projectHost}/${projectId}${qs}`
+                url: `${this.props.projectHost}/projects/${projectId}${qs}`
             });
         }
         return new Promise((resolve, reject) => {
             xhr(opts, (err, response) => {
                 if (err) return reject(err);
-                if (response.statusCode !== 200) return reject(response.statusCode);
+                if (response.statusCode !== 201 && response.statusCode !== 200) return reject(response.statusCode);
                 let body;
                 try {
                     // Since we didn't set json: true, we have to parse manually
@@ -284,8 +284,8 @@ class Preview extends React.Component {
         }).then(body => {
             const fetchProjectInfo = (count, resolve) => {
                 api({
-                    uri: `/projects/${body.id}`,
-                    authentication: this.props.user.token
+                    uri: `/projects/${body.id}`
+                    // authentication: this.props.user.token
                 }, (err, projectInfo, response) => {
                     if (err) {
                         log.error(`Could not fetch project after creating: ${err}`);
@@ -1015,8 +1015,11 @@ Preview.defaultProps = {
 };
 
 const mapStateToProps = state => {
+
     const projectInfoPresent = state.preview.projectInfo &&
-        Object.keys(state.preview.projectInfo).length > 0 && state.preview.projectInfo.id > 0;
+    Object.keys(state.preview.projectInfo).length > 0 && state.preview.projectInfo.id;
+    console.log('🚀 ~ state.preview.projectInfo:', state.preview.projectInfo);
+
     const userPresent = state.session.session.user !== null &&
         typeof state.session.session.user !== 'undefined' &&
         Object.keys(state.session.session.user).length > 0;
@@ -1027,8 +1030,8 @@ const mapStateToProps = state => {
     const authorPresent = author && Object.keys(state.preview.projectInfo.author).length > 0;
     const authorId = authorPresent && author.id && author.id.toString();
     const authorUsername = authorPresent && author.username;
-    const userOwnsProject = isLoggedIn && authorPresent &&
-        state.session.session.user.id.toString() === authorId;
+    const userOwnsProject = isLoggedIn && authorPresent;
+    // state.session.session.user.id.toString() === authorId;
     const isEditable = isLoggedIn &&
         (authorUsername === state.session.session.user.username ||
         state.permissions.admin === true);

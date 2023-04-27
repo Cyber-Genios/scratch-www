@@ -1,9 +1,9 @@
 {
   "name": "www",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "Standalone WWW client for Scratch",
   "scripts": {
-    "start": "node ./dev-server/index.js",
+    "start": "export NODE_OPTIONS=--openssl-legacy-provider && PROJECT_HOST=https://apiv2.cybergenios.com.br/scratch/api API_HOST=https://apiv2.cybergenios.com.br/scratch/api ASSET_HOST=https://apiv2.cybergenios.com.br/scratch/assets node ./dev-server/index.js",
     "test": "npm run test:lint && npm run build && npm run test:unit",
     "test:lint": "eslint . --ext .js,.jsx,.json",
     "test:lint:ci": "eslint . --ext .js,.jsx,.json --format junit -o ./test/results/lint-results.xml",

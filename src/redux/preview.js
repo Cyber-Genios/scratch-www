@@ -197,12 +197,13 @@ module.exports.setVisibilityInfo = visibilityInfo => ({
 });
 
 module.exports.getProjectInfo = (id, token) => (dispatch => {
+    console.log('🚀 ~ getProjectInfo:', id);
     const opts = {
         uri: `/projects/${id}`
     };
-    if (token) {
-        Object.assign(opts, {authentication: token});
-    }
+    // if (token) {
+    //     Object.assign(opts, {authentication: token});
+    // }
     dispatch(module.exports.setFetchStatus('project', module.exports.Status.FETCHING));
     api(opts, (err, body, response) => {
         if (err) {
@@ -228,18 +229,20 @@ module.exports.getProjectInfo = (id, token) => (dispatch => {
 
 module.exports.getVisibilityInfo = (id, ownerUsername, token) => (dispatch => {
     dispatch(module.exports.setFetchStatus('visibility', module.exports.Status.FETCHING));
-    api({
-        uri: `/users/${ownerUsername}/projects/${id}/visibility`,
-        authentication: token
-    }, (err, body, response) => {
-        if (err || !body || response.statusCode !== 200) {
-            dispatch(module.exports.setFetchStatus('visibility', module.exports.Status.ERROR));
-            dispatch(module.exports.setError('No visibility info available'));
-            return;
-        }
-        dispatch(module.exports.setFetchStatus('visibility', module.exports.Status.FETCHED));
-        dispatch(module.exports.setVisibilityInfo(body));
-    });
+    // api({
+    //     uri: `/users/${ownerUsername}/projects/${id}/visibility`,
+    //     authentication: token
+    // }, (err, body, response) => {
+    //     if (err || !body || response.statusCode !== 200) {
+    //         dispatch(module.exports.setFetchStatus('visibility', module.exports.Status.ERROR));
+    //         dispatch(module.exports.setError('No visibility info available'));
+    //         return;
+    //     }
+    //     dispatch(module.exports.setFetchStatus('visibility', module.exports.Status.FETCHED));
+    //     dispatch(module.exports.setVisibilityInfo(body));
+    // });
+    dispatch(module.exports.setFetchStatus('visibility', module.exports.Status.FETCHED));
+    dispatch(module.exports.setVisibilityInfo([]));
 });
 
 module.exports.getOriginalInfo = id => (dispatch => {
@@ -292,23 +295,26 @@ module.exports.getParentInfo = id => (dispatch => {
 
 module.exports.getFavedStatus = (id, username, token) => (dispatch => {
     dispatch(module.exports.setFetchStatus('faved', module.exports.Status.FETCHING));
-    api({
-        uri: `/projects/${id}/favorites/user/${username}`,
-        authentication: token
-    }, (err, body) => {
-        if (err) {
-            dispatch(module.exports.setFetchStatus('faved', module.exports.Status.ERROR));
-            dispatch(module.exports.setError(err));
-            return;
-        }
-        if (typeof body === 'undefined') {
-            dispatch(module.exports.setFetchStatus('faved', module.exports.Status.ERROR));
-            dispatch(module.exports.setError('No faved info'));
-            return;
-        }
-        dispatch(module.exports.setFetchStatus('faved', module.exports.Status.FETCHED));
-        dispatch(module.exports.setFaved(body.userFavorite));
-    });
+    // api({
+    //     uri: `/projects/${id}/favorites/user/${username}`
+    //     // authentication: token
+    // }, (err, body) => {
+    //     if (err) {
+    //         dispatch(module.exports.setFetchStatus('faved', module.exports.Status.ERROR));
+    //         dispatch(module.exports.setError(err));
+    //         return;
+    //     }
+    //     if (typeof body === 'undefined') {
+    //         dispatch(module.exports.setFetchStatus('faved', module.exports.Status.ERROR));
+    //         dispatch(module.exports.setError('No faved info'));
+    //         return;
+    //     }
+    //     dispatch(module.exports.setFetchStatus('faved', module.exports.Status.FETCHED));
+    //     dispatch(module.exports.setFaved(body.userFavorite));
+    // });
+    const body = {projectId: '644a870548f2d902fe0870d4', userFavorite: false, statusChanged: false};
+    dispatch(module.exports.setFetchStatus('faved', module.exports.Status.FETCHED));
+    dispatch(module.exports.setFaved(body.userFavorite));
 });
 
 module.exports.setFavedStatus = (faved, id, username, token) => (dispatch => {
@@ -356,7 +362,7 @@ module.exports.setFavedStatusViaProxy = (faved, id, username, token) => (dispatc
         api({
             uri: `/proxy/projects/${id}/favorites/user/${username}`,
             authentication: token,
-            withCredentials: true,
+            withcredentials: true,
             method: 'POST',
             useCsrf: true,
             headers: {'X-Requested-With': 'XMLHttpRequest'}
@@ -376,7 +382,7 @@ module.exports.setFavedStatusViaProxy = (faved, id, username, token) => (dispatc
         api({
             uri: `/proxy/projects/${id}/favorites/user/${username}`,
             authentication: token,
-            withCredentials: true,
+            // withcredentials: true,
             method: 'DELETE',
             useCsrf: true,
             headers: {'X-Requested-With': 'XMLHttpRequest'}
@@ -397,23 +403,26 @@ module.exports.setFavedStatusViaProxy = (faved, id, username, token) => (dispatc
 
 module.exports.getLovedStatus = (id, username, token) => (dispatch => {
     dispatch(module.exports.setFetchStatus('loved', module.exports.Status.FETCHING));
-    api({
-        uri: `/projects/${id}/loves/user/${username}`,
-        authentication: token
-    }, (err, body) => {
-        if (err) {
-            dispatch(module.exports.setFetchStatus('loved', module.exports.Status.ERROR));
-            dispatch(module.exports.setError(err));
-            return;
-        }
-        if (typeof body === 'undefined') {
-            dispatch(module.exports.setFetchStatus('loved', module.exports.Status.ERROR));
-            dispatch(module.exports.setError('No loved info'));
-            return;
-        }
-        dispatch(module.exports.setFetchStatus('loved', module.exports.Status.FETCHED));
-        dispatch(module.exports.setLoved(body.userLove));
-    });
+    // api({
+    //     uri: `/projects/${id}/loves/user/${username}`
+    //     // authentication: token
+    // }, (err, body) => {
+    //     if (err) {
+    //         dispatch(module.exports.setFetchStatus('loved', module.exports.Status.ERROR));
+    //         dispatch(module.exports.setError(err));
+    //         return;
+    //     }
+    //     if (typeof body === 'undefined') {
+    //         dispatch(module.exports.setFetchStatus('loved', module.exports.Status.ERROR));
+    //         dispatch(module.exports.setError('No loved info'));
+    //         return;
+    //     }
+    //     dispatch(module.exports.setFetchStatus('loved', module.exports.Status.FETCHED));
+    //     dispatch(module.exports.setLoved(body.userLove));
+    // });
+    const body = {projectId: '644a870548f2d902fe0870d4', userLove: false, statusChanged: false};
+    dispatch(module.exports.setFetchStatus('loved', module.exports.Status.FETCHED));
+    dispatch(module.exports.setLoved(body.userLove));
 });
 
 module.exports.setLovedStatus = (loved, id, username, token) => (dispatch => {
@@ -461,7 +470,7 @@ module.exports.setLovedStatusViaProxy = (loved, id, username, token) => (dispatc
         api({
             uri: `/proxy/projects/${id}/loves/user/${username}`,
             authentication: token,
-            withCredentials: true,
+            // withcredentials: true,
             method: 'POST',
             useCsrf: true,
             headers: {'X-Requested-With': 'XMLHttpRequest'}
@@ -481,7 +490,7 @@ module.exports.setLovedStatusViaProxy = (loved, id, username, token) => (dispatc
         api({
             uri: `/proxy/projects/${id}/loves/user/${username}`,
             authentication: token,
-            withCredentials: true,
+            // withcredentials: true,
             method: 'DELETE',
             useCsrf: true,
             headers: {'X-Requested-With': 'XMLHttpRequest'}
@@ -502,77 +511,83 @@ module.exports.setLovedStatusViaProxy = (loved, id, username, token) => (dispatc
 
 module.exports.getRemixes = id => (dispatch => {
     dispatch(module.exports.setFetchStatus('remixes', module.exports.Status.FETCHING));
-    api({
-        uri: `/projects/${id}/remixes?limit=5`
-    }, (err, body) => {
-        if (err) {
-            dispatch(module.exports.setFetchStatus('remixes', module.exports.Status.ERROR));
-            dispatch(module.exports.setError(err));
-            return;
-        }
-        if (typeof body === 'undefined') {
-            dispatch(module.exports.setFetchStatus('remixes', module.exports.Status.ERROR));
-            dispatch(module.exports.setError('No remixes info'));
-            return;
-        }
-        if (body.code === 'NotFound') {
-            // no remixes found, set body to empty array
-            body = [];
-        }
-        dispatch(module.exports.setFetchStatus('remixes', module.exports.Status.FETCHED));
-        dispatch(module.exports.setRemixes(body));
-    });
+    // api({
+    //     uri: `/projects/${id}/remixes?limit=5`
+    // }, (err, body) => {
+    //     if (err) {
+    //         dispatch(module.exports.setFetchStatus('remixes', module.exports.Status.ERROR));
+    //         dispatch(module.exports.setError(err));
+    //         return;
+    //     }
+    //     if (typeof body === 'undefined') {
+    //         dispatch(module.exports.setFetchStatus('remixes', module.exports.Status.ERROR));
+    //         dispatch(module.exports.setError('No remixes info'));
+    //         return;
+    //     }
+    //     if (body.code === 'NotFound') {
+    //         // no remixes found, set body to empty array
+    //         body = [];
+    //     }
+    //     dispatch(module.exports.setFetchStatus('remixes', module.exports.Status.FETCHED));
+    //     dispatch(module.exports.setRemixes(body));
+    // });
+    const body = [];
+    dispatch(module.exports.setFetchStatus('remixes', module.exports.Status.FETCHED));
+    dispatch(module.exports.setRemixes(body));
 });
 
 
 module.exports.getProjectStudios = (id, ownerUsername, isAdmin, token) => (dispatch => {
     dispatch(module.exports.setFetchStatus('projectStudios', module.exports.Status.FETCHING));
-    const opts = {
-        uri: `${isAdmin ? '/admin' : `/users/${ownerUsername}`}/projects/${id}/studios`
-    };
-    if (token) {
-        Object.assign(opts, {authentication: token});
-    }
-    api(opts, (err, body, res) => {
-        if (err) {
-            dispatch(module.exports.setFetchStatus('projectStudios', module.exports.Status.ERROR));
-            dispatch(module.exports.setError(err));
-            return;
-        }
-        if (typeof body === 'undefined') {
-            dispatch(module.exports.setFetchStatus('projectStudios', module.exports.Status.ERROR));
-            dispatch(module.exports.setError('No projectStudios info'));
-            return;
-        }
-        if (res.statusCode === 404) { // NotFound
-            body = [];
-        }
-        dispatch(module.exports.setFetchStatus('projectStudios', module.exports.Status.FETCHED));
-        dispatch(module.exports.setProjectStudios(body));
-    });
+    // const opts = {
+    //     uri: `${isAdmin ? '/admin' : `/users/${ownerUsername}`}/projects/${id}/studios`
+    // };
+    // if (token) {
+    //     Object.assign(opts, {authentication: token});
+    // }
+    // api(opts, (err, body, res) => {
+    //     if (err) {
+    //         dispatch(module.exports.setFetchStatus('projectStudios', module.exports.Status.ERROR));
+    //         dispatch(module.exports.setError(err));
+    //         return;
+    //     }
+    //     if (typeof body === 'undefined') {
+    //         dispatch(module.exports.setFetchStatus('projectStudios', module.exports.Status.ERROR));
+    //         dispatch(module.exports.setError('No projectStudios info'));
+    //         return;
+    //     }
+    //     if (res.statusCode === 404) { // NotFound
+    //         body = [];
+    //     }
+    dispatch(module.exports.setFetchStatus('projectStudios', module.exports.Status.FETCHED));
+    dispatch(module.exports.setProjectStudios([]));
+    // });
 });
 
 module.exports.getCuratedStudios = username => (dispatch => {
     dispatch(module.exports.setFetchStatus('curatedStudios', module.exports.Status.FETCHING));
-    api({
-        uri: `/users/${username}/studios/curate`
-    }, (err, body, res) => {
-        if (err) {
-            dispatch(module.exports.setFetchStatus('curatedStudios', module.exports.Status.ERROR));
-            dispatch(module.exports.setError(err));
-            return;
-        }
-        if (typeof body === 'undefined') {
-            dispatch(module.exports.setFetchStatus('curatedStudios', module.exports.Status.ERROR));
-            dispatch(module.exports.setError('No curated studios info'));
-            return;
-        }
-        if (res.statusCode === 404) { // NotFound
-            body = [];
-        }
-        dispatch(module.exports.setFetchStatus('curatedStudios', module.exports.Status.FETCHED));
-        dispatch(module.exports.setCuratedStudios(body));
-    });
+    // api({
+    //     uri: `/users/${username}/studios/curate`
+    // }, (err, body, res) => {
+    //     if (err) {
+    //         dispatch(module.exports.setFetchStatus('curatedStudios', module.exports.Status.ERROR));
+    //         dispatch(module.exports.setError(err));
+    //         return;
+    //     }
+    //     if (typeof body === 'undefined') {
+    //         dispatch(module.exports.setFetchStatus('curatedStudios', module.exports.Status.ERROR));
+    //         dispatch(module.exports.setError('No curated studios info'));
+    //         return;
+    //     }
+    //     if (res.statusCode === 404) { // NotFound
+    //         body = [];
+    //     }
+    //     dispatch(module.exports.setFetchStatus('curatedStudios', module.exports.Status.FETCHED));
+    //     dispatch(module.exports.setCuratedStudios(body));
+    // });
+    const body = [];
+    dispatch(module.exports.setFetchStatus('curatedStudios', module.exports.Status.FETCHED));
+    dispatch(module.exports.setCuratedStudios(body));
 });
 
 module.exports.addToStudio = (studioId, projectId, token) => (dispatch => {
@@ -618,9 +633,9 @@ module.exports.leaveStudio = (studioId, projectId, token) => (dispatch => {
 module.exports.updateProject = (id, jsonData, username, token) => (dispatch => {
     dispatch(module.exports.setFetchStatus('project', module.exports.Status.FETCHING));
     api({
-        uri: `/projects/${id}`,
-        authentication: token,
-        method: 'PUT',
+        uri: `/projects/${id}`, // ${id} undefined id
+        // authentication: token,
+        method: 'PUT', // PUT not implemented
         json: jsonData
     }, (err, body, res) => {
         if (err) {
@@ -648,7 +663,7 @@ module.exports.shareProject = (projectId, token) => (dispatch => {
     api({
         uri: `/proxy/projects/${projectId}/share`,
         authentication: token,
-        withCredentials: true,
+        // withcredentials: true,
         method: 'PUT',
         useCsrf: true
     }, (err, body, res) => {
@@ -673,7 +688,7 @@ module.exports.reportProject = (id, jsonData, token) => (dispatch => {
     api({
         uri: `/proxy/projects/${id}/report`,
         authentication: token,
-        withCredentials: true,
+        // withcredentials: true,
         method: 'POST',
         useCsrf: true,
         json: jsonData
@@ -688,23 +703,23 @@ module.exports.reportProject = (id, jsonData, token) => (dispatch => {
 
 module.exports.updateProjectThumbnail = (id, blob) => (dispatch => {
     dispatch(module.exports.setFetchStatus('project-thumbnail', module.exports.Status.FETCHING));
-    api({
-        uri: `/internalapi/project/thumbnail/${id}/set/`,
-        method: 'POST',
-        headers: {
-            'Content-Type': 'image/png'
-        },
-        withCredentials: true,
-        useCsrf: true,
-        body: blob,
-        host: '' // Not handled by the API, use existing infrastructure
-    }, (err, body, res) => {
-        if (err || res.statusCode !== 200) {
-            dispatch(module.exports.setFetchStatus('project-thumbnail', module.exports.Status.ERROR));
-            return;
-        }
-        dispatch(module.exports.setFetchStatus('project-thumbnail', module.exports.Status.FETCHED));
-    });
+    // api({
+    //     uri: `/internalapi/project/thumbnail/${id}/set/`,
+    //     method: 'POST',
+    //     headers: {
+    //         'Content-Type': 'image/png'
+    //     },
+    //     // withcredentials: true,
+    //     useCsrf: true,
+    //     body: blob,
+    //     host: '' // Not handled by the API, use existing infrastructure
+    // }, (err, body, res) => {
+    //     if (err || res.statusCode !== 200) {
+    //         dispatch(module.exports.setFetchStatus('project-thumbnail', module.exports.Status.ERROR));
+    //         return;
+    //     }
+    dispatch(module.exports.setFetchStatus('project-thumbnail', module.exports.Status.FETCHED));
+    // });
 });
 
 module.exports.logProjectView = (id, authorUsername, token) => (dispatch => {
@@ -713,7 +728,7 @@ module.exports.logProjectView = (id, authorUsername, token) => (dispatch => {
         uri: `/users/${authorUsername}/projects/${id}/views`,
         method: 'POST',
         authentication: token,
-        withCredentials: true,
+        // withcredentials: true,
         useCsrf: true
     }, (err, body, res) => {
         if (err || res.statusCode !== 200) {
