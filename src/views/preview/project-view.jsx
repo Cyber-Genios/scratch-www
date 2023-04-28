@@ -1018,8 +1018,6 @@ const mapStateToProps = state => {
 
     const projectInfoPresent = state.preview.projectInfo &&
     Object.keys(state.preview.projectInfo).length > 0 && state.preview.projectInfo.id;
-    console.log('🚀 ~ state.preview.projectInfo:', state.preview.projectInfo);
-
     const userPresent = state.session.session.user !== null &&
         typeof state.session.session.user !== 'undefined' &&
         Object.keys(state.session.session.user).length > 0;

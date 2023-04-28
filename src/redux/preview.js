@@ -197,7 +197,6 @@ module.exports.setVisibilityInfo = visibilityInfo => ({
 });
 
 module.exports.getProjectInfo = (id, token) => (dispatch => {
-    console.log('🚀 ~ getProjectInfo:', id);
     const opts = {
         uri: `/projects/${id}`
     };
@@ -295,26 +294,27 @@ module.exports.getParentInfo = id => (dispatch => {
 
 module.exports.getFavedStatus = (id, username, token) => (dispatch => {
     dispatch(module.exports.setFetchStatus('faved', module.exports.Status.FETCHING));
-    // api({
-    //     uri: `/projects/${id}/favorites/user/${username}`
-    //     // authentication: token
-    // }, (err, body) => {
-    //     if (err) {
-    //         dispatch(module.exports.setFetchStatus('faved', module.exports.Status.ERROR));
-    //         dispatch(module.exports.setError(err));
-    //         return;
-    //     }
-    //     if (typeof body === 'undefined') {
-    //         dispatch(module.exports.setFetchStatus('faved', module.exports.Status.ERROR));
-    //         dispatch(module.exports.setError('No faved info'));
-    //         return;
-    //     }
-    //     dispatch(module.exports.setFetchStatus('faved', module.exports.Status.FETCHED));
-    //     dispatch(module.exports.setFaved(body.userFavorite));
-    // });
-    const body = {projectId: '644a870548f2d902fe0870d4', userFavorite: false, statusChanged: false};
-    dispatch(module.exports.setFetchStatus('faved', module.exports.Status.FETCHED));
-    dispatch(module.exports.setFaved(body.userFavorite));
+    api({
+        uri: `/projects/${id}/favorites/user/${username}`,
+        method: 'POST' // should be GET
+        // authentication: token
+    }, (err, body) => {
+        if (err) {
+            dispatch(module.exports.setFetchStatus('faved', module.exports.Status.ERROR));
+            dispatch(module.exports.setError(err));
+            return;
+        }
+        if (typeof body === 'undefined') {
+            dispatch(module.exports.setFetchStatus('faved', module.exports.Status.ERROR));
+            dispatch(module.exports.setError('No faved info'));
+            return;
+        }
+        dispatch(module.exports.setFetchStatus('faved', module.exports.Status.FETCHED));
+        dispatch(module.exports.setFaved(body.userFavorite));
+    });
+    // const body = {projectId: '644a870548f2d902fe0870d4', userFavorite: false, statusChanged: false};
+    // dispatch(module.exports.setFetchStatus('faved', module.exports.Status.FETCHED));
+    // dispatch(module.exports.setFaved(body.userFavorite));
 });
 
 module.exports.setFavedStatus = (faved, id, username, token) => (dispatch => {
@@ -322,7 +322,7 @@ module.exports.setFavedStatus = (faved, id, username, token) => (dispatch => {
     if (faved) {
         api({
             uri: `/projects/${id}/favorites/user/${username}`,
-            authentication: token,
+            // authentication: token,
             method: 'POST'
         }, (err, body) => {
             if (err) {
@@ -339,7 +339,7 @@ module.exports.setFavedStatus = (faved, id, username, token) => (dispatch => {
     } else {
         api({
             uri: `/projects/${id}/favorites/user/${username}`,
-            authentication: token,
+            // authentication: token,
             method: 'DELETE'
         }, (err, body) => {
             if (err) {
@@ -361,8 +361,8 @@ module.exports.setFavedStatusViaProxy = (faved, id, username, token) => (dispatc
     if (faved) {
         api({
             uri: `/proxy/projects/${id}/favorites/user/${username}`,
-            authentication: token,
-            withcredentials: true,
+            // authentication: token,
+            // withcredentials: true,
             method: 'POST',
             useCsrf: true,
             headers: {'X-Requested-With': 'XMLHttpRequest'}
@@ -403,26 +403,27 @@ module.exports.setFavedStatusViaProxy = (faved, id, username, token) => (dispatc
 
 module.exports.getLovedStatus = (id, username, token) => (dispatch => {
     dispatch(module.exports.setFetchStatus('loved', module.exports.Status.FETCHING));
-    // api({
-    //     uri: `/projects/${id}/loves/user/${username}`
-    //     // authentication: token
-    // }, (err, body) => {
-    //     if (err) {
-    //         dispatch(module.exports.setFetchStatus('loved', module.exports.Status.ERROR));
-    //         dispatch(module.exports.setError(err));
-    //         return;
-    //     }
-    //     if (typeof body === 'undefined') {
-    //         dispatch(module.exports.setFetchStatus('loved', module.exports.Status.ERROR));
-    //         dispatch(module.exports.setError('No loved info'));
-    //         return;
-    //     }
-    //     dispatch(module.exports.setFetchStatus('loved', module.exports.Status.FETCHED));
-    //     dispatch(module.exports.setLoved(body.userLove));
-    // });
-    const body = {projectId: '644a870548f2d902fe0870d4', userLove: false, statusChanged: false};
-    dispatch(module.exports.setFetchStatus('loved', module.exports.Status.FETCHED));
-    dispatch(module.exports.setLoved(body.userLove));
+    api({
+        uri: `/projects/${id}/loves/user/${username}`,
+        method: 'POST' // should be GET
+        // authentication: token
+    }, (err, body) => {
+        if (err) {
+            dispatch(module.exports.setFetchStatus('loved', module.exports.Status.ERROR));
+            dispatch(module.exports.setError(err));
+            return;
+        }
+        if (typeof body === 'undefined') {
+            dispatch(module.exports.setFetchStatus('loved', module.exports.Status.ERROR));
+            dispatch(module.exports.setError('No loved info'));
+            return;
+        }
+        dispatch(module.exports.setFetchStatus('loved', module.exports.Status.FETCHED));
+        dispatch(module.exports.setLoved(body.userLove));
+    });
+    // const body = {projectId: '644a870548f2d902fe0870d4', userLove: false, statusChanged: false};
+    // dispatch(module.exports.setFetchStatus('loved', module.exports.Status.FETCHED));
+    // dispatch(module.exports.setLoved(body.userLove));
 });
 
 module.exports.setLovedStatus = (loved, id, username, token) => (dispatch => {
@@ -430,7 +431,7 @@ module.exports.setLovedStatus = (loved, id, username, token) => (dispatch => {
     if (loved) {
         api({
             uri: `/projects/${id}/loves/user/${username}`,
-            authentication: token,
+            // authentication: token,
             method: 'POST'
         }, (err, body) => {
             if (err) {
@@ -447,7 +448,7 @@ module.exports.setLovedStatus = (loved, id, username, token) => (dispatch => {
     } else {
         api({
             uri: `/projects/${id}/loves/user/${username}`,
-            authentication: token,
+            // authentication: token,
             method: 'DELETE'
         }, (err, body) => {
             if (err) {
@@ -703,23 +704,25 @@ module.exports.reportProject = (id, jsonData, token) => (dispatch => {
 
 module.exports.updateProjectThumbnail = (id, blob) => (dispatch => {
     dispatch(module.exports.setFetchStatus('project-thumbnail', module.exports.Status.FETCHING));
-    // api({
-    //     uri: `/internalapi/project/thumbnail/${id}/set/`,
-    //     method: 'POST',
-    //     headers: {
-    //         'Content-Type': 'image/png'
-    //     },
-    //     // withcredentials: true,
-    //     useCsrf: true,
-    //     body: blob,
-    //     host: '' // Not handled by the API, use existing infrastructure
-    // }, (err, body, res) => {
-    //     if (err || res.statusCode !== 200) {
-    //         dispatch(module.exports.setFetchStatus('project-thumbnail', module.exports.Status.ERROR));
-    //         return;
-    //     }
-    dispatch(module.exports.setFetchStatus('project-thumbnail', module.exports.Status.FETCHED));
-    // });
+    api({
+        // uri: `/internalapi/project/thumbnail/${id}/set/`,
+        uri: `/projects/${id}/thumbnail/`,
+        method: 'POST',
+        headers: {
+            'Content-Type': 'image/png'
+        },
+        // withcredentials: true,
+        // useCsrf: true,
+        body: blob
+        // host: ''
+        // Not handled by the API, use existing infrastructure
+    }, (err, body, res) => {
+        if (err || res.statusCode !== 200) {
+            dispatch(module.exports.setFetchStatus('project-thumbnail', module.exports.Status.ERROR));
+            return;
+        }
+        dispatch(module.exports.setFetchStatus('project-thumbnail', module.exports.Status.FETCHED));
+    });
 });
 
 module.exports.logProjectView = (id, authorUsername, token) => (dispatch => {
