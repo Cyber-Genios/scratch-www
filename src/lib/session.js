@@ -66,7 +66,7 @@ module.exports.requestSessionWithRetry = (resolve, reject, retriesLeft, totalDel
         user: {
             id: '6449363648f2d902fe086fac',
             banned: false,
-            username: 'cybergenio',
+            username: 'cybergenios',
             token: 'b8e578a43bde4a2a922413117104fddb:xqpv7thTPoeCW-RF2NHLvhVxF1I',
             thumbnailUrl: '//cdn2.scratch.mit.edu/get_image/user/default_32x32.png',
             dateJoined: '2023-01-23T14:20:27',
@@ -78,7 +78,7 @@ module.exports.requestSessionWithRetry = (resolve, reject, retriesLeft, totalDel
             scratcher: false,
             new_scratcher: true,
             invited_scratcher: false,
-            social: false,
+            social: true,
             educator: false,
             educator_invitee: false,
             student: false,
