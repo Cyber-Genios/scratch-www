@@ -16,6 +16,8 @@
 
     .logo {
         margin-right: 10px;
+        display: flex;
+        align-items: center;
 
         a {
             display: block;
@@ -39,6 +41,8 @@
 
     .inner > ul > li {
         &.search {
+            display: flex;
+            align-items: center;
             margin: 0 20px;
             border-right: 0;
             color: $type-white;

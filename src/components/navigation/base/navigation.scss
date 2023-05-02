@@ -9,7 +9,7 @@
     border-bottom: 1px solid $active-gray;
 
     box-shadow: 0 0 3px $box-shadow-gray;
-    background-color: $ui-blue;
+    background-color: $ui-blue-dark;
 
     &.staging {
         background-color: $ui-orange;
@@ -18,7 +18,8 @@
 
     width: 100%;
     /* NOTE: Height should match offset settings in main.scss file */
-    height: 50px;
+    height: 64px;
+    box-sizing: border-box;
 
     .ie9 & {
         display: table;
@@ -29,12 +30,11 @@
         display: flex;
         margin: 0;
         padding: 0;
-        height: 50px;
+        height: 64px;
         list-style: none;
 
         flex-wrap: nowrap;
         flex-direction: row;
-        justify-content: flex-start;
 
         .ie9 & {
             display: table-row;
@@ -42,12 +42,11 @@
 
 
         > li {
-            display: inline-block;
+            // display: inline-block;
             position: relative;
             float: left;
             margin: 0;
             height: 100%;
-            align-self: flex-start;
 
             &.right {
                 float: right;
@@ -68,7 +67,7 @@
             .ie9 & {
                 display: table-cell;
                 float: none;
-                height: 50px;
+                height: 64px;
                 vertical-align: bottom;
             }
         }
@@ -76,9 +75,10 @@
 
     .link {
         > a {
-            display: block;
-            padding: 13px 15px 4px 15px;
-            height: 33px;
+            height: 64px;
+            display: flex;
+            align-items: center;
+            padding: 0 13px;
 
             text-decoration: none;
             white-space: nowrap;
