@@ -5,4 +5,4 @@ intl/*
 locales/*
 **/*.min.js
 **/node_modules/*
-scratch-gui/*
+@cybergenios/scratch-gui/*

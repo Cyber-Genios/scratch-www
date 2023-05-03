@@ -88,6 +88,7 @@ module.exports = {
                 include: [
                     path.resolve(__dirname, 'src'),
                     /node_modules[\\/]scratch-[^\\/]+[\\/]src/,
+                    /node_modules[\\/]@cybergenios[\\/]scratch-[^\\/]+[\\/]src/,
                     /node_modules[\\/]pify/,
                     /node_modules[\\/]async/
                 ]
@@ -185,7 +186,7 @@ module.exports = {
         new CopyWebpackPlugin({
             patterns: [
                 {
-                    from: 'node_modules/scratch-gui/dist/static/blocks-media',
+                    from: 'node_modules/@cybergenios/scratch-gui/dist/static/blocks-media',
                     to: 'static/blocks-media'
                 }
             ]
@@ -193,7 +194,7 @@ module.exports = {
         new CopyWebpackPlugin({
             patterns: [
                 {
-                    from: 'node_modules/scratch-gui/dist/chunks',
+                    from: 'node_modules/@cybergenios/scratch-gui/dist/chunks',
                     to: 'static/chunks'
                 }
             ]
@@ -201,21 +202,21 @@ module.exports = {
         new CopyWebpackPlugin({
             patterns: [
                 {
-                    from: 'node_modules/scratch-gui/dist/extension-worker.js'
+                    from: 'node_modules/@cybergenios/scratch-gui/dist/extension-worker.js'
                 }
             ]
         }),
         new CopyWebpackPlugin({
             patterns: [
                 {
-                    from: 'node_modules/scratch-gui/dist/extension-worker.js.map'
+                    from: 'node_modules/@cybergenios/scratch-gui/dist/extension-worker.js.map'
                 }
             ]
         }),
         new CopyWebpackPlugin({
             patterns: [
                 {
-                    from: 'node_modules/scratch-gui/dist/static/assets',
+                    from: 'node_modules/@cybergenios/scratch-gui/dist/static/assets',
                     to: 'static/assets'
                 }
             ]

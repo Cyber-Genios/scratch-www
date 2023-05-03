@@ -1,5 +1,5 @@
 {
-  "name": "www",
+  "name": "@cybergenios/www",
   "version": "1.0.2",
   "description": "Standalone WWW client for Scratch",
   "scripts": {
@@ -44,6 +44,7 @@
   },
   "homepage": "https://github.com/llk/scratch-www#readme",
   "dependencies": {
+    "@cybergenios/scratch-gui": "^1.8.20",
     "bunyan": "1.8.15",
     "clipboard-copy": "2.0.1",
     "express": "4.16.1",
