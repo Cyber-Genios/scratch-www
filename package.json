@@ -1,6 +1,6 @@
 {
   "name": "@cybergenios/www",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Standalone WWW client for Scratch",
   "scripts": {
     "start": "export NODE_OPTIONS=--openssl-legacy-provider && PROJECT_HOST=https://apiv2.cybergenios.com.br/scratch/api API_HOST=https://apiv2.cybergenios.com.br/scratch/api ASSET_HOST=https://apiv2.cybergenios.com.br/scratch/assets node ./dev-server/index.js",
@@ -44,7 +44,7 @@
   },
   "homepage": "https://github.com/llk/scratch-www#readme",
   "dependencies": {
-    "@cybergenios/scratch-gui": "^1.8.20",
+    "@cybergenios/scratch-gui": "^1.8.23",
     "bunyan": "1.8.15",
     "clipboard-copy": "2.0.1",
     "express": "4.16.1",
