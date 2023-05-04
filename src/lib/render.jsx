@@ -46,7 +46,18 @@ const render = (jsx, element, reducers, initialState, enhancer) => {
             </StoreProvider>,
             element
         );
-    
+
+        const params = new Proxy(new URLSearchParams(window.location.search), {
+            get: (searchParams, prop) => searchParams.get(prop)
+        });
+        
+        if (params.accessToken) {
+            localStorage.setItem('accessToken', params.accessToken);
+        }
+        if (params.refreshToken) {
+            localStorage.setItem('refreshToken', params.refreshToken);
+        }
+        
         // Get initial session & permissions
         store.dispatch(permissionsActions.getPermissions());
         store.dispatch(sessionActions.refreshSession());

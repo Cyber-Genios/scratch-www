@@ -118,7 +118,7 @@ module.exports.handleCompleteRegistration = createProject => (dispatch => {
 
 module.exports.handleLogIn = (formData, callback) => (dispatch => {
     dispatch(module.exports.setLoginError(null));
-    formData.useMessages = true; // NOTE: this may or may not be being used anywhere else
+    formData.useMessages = true; // NOTE: this m ay or may not be being used anywhere else
     api({
         method: 'post',
         host: '',

@@ -84,7 +84,7 @@ module.exports = (opts, callback) => {
             callback(err, body, res);
         });
     };
-
+    
     if (typeof jar.get('scratchlanguage') !== 'undefined') {
         opts.headers['Accept-Language'] = `${jar.get('scratchlanguage')}, en;q=0.8`;
     }
@@ -100,4 +100,6 @@ module.exports = (opts, callback) => {
     } else {
         apiRequest(opts);
     }
+
+    opts.headers.Authorization = `Bearer ${localStorage.getItem('accessToken')}`;
 };
