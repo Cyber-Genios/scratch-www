@@ -157,17 +157,34 @@ module.exports.handleLogIn = (formData, callback) => (dispatch => {
 module.exports.handleLogOut = () => (() => {
     // POST to /accounts/logout using a dummy form instead of XHR. This ensures
     // logout only happens AFTER onbeforeunload has the chance to prevent nagivation.
-    jar.use('scratchcsrftoken', '/csrf_token/', (err, csrftoken) => {
-        if (err) return log.error('Error while retrieving CSRF token', err);
-        const form = document.createElement('form');
-        form.setAttribute('method', 'POST');
-        form.setAttribute('action', '/accounts/logout/');
-        const csrfField = document.createElement('input');
-        csrfField.setAttribute('type', 'hidden');
-        csrfField.setAttribute('name', 'csrfmiddlewaretoken');
-        csrfField.setAttribute('value', csrftoken);
-        form.appendChild(csrfField);
-        document.body.appendChild(form);
-        form.submit();
+    // jar.use('scratchcsrftoken', '/csrf_token/', (err, csrftoken) => {
+    //     if (err) return log.error('Error while retrieving CSRF token', err);
+    //     const form = document.createElement('form');
+    //     form.setAttribute('method', 'POST');
+    //     form.setAttribute('action', '/accounts/logout/');
+    //     const csrfField = document.createElement('input');
+    //     csrfField.setAttribute('type', 'hidden');
+    //     csrfField.setAttribute('name', 'csrfmiddlewaretoken');
+    //     csrfField.setAttribute('value', csrftoken);
+    //     form.appendChild(csrfField);
+    //     document.body.appendChild(form);
+    //     form.submit();
+    // });
+
+    
+    // TODO get host from env
+    api({
+        method: 'post',
+        host: 'https://apiv2.cybergenios.com.br',
+        uri: '/auth/logout',
+        json: {refreshToken: localStorage.getItem('refreshToken')}
+    }, () => {
+        localStorage.removeItem('accessToken');
+        localStorage.removeItem('refreshToken');
+        document.cookie = `permissions=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/`;
+        document.cookie = `scratchcsrftoken=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/`;
+        document.cookie = `scratchsessionsid=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/`;
+        window.location.reload();
     });
+
 });
