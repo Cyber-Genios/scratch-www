@@ -1,4 +1,5 @@
-const api = require('./api');
+// const api = require('./api');
+const jwt = require('jsonwebtoken');
 
 module.exports = {};
 
@@ -40,7 +41,7 @@ returns the response, even if it is undefined or empty
 total api calls: 4
 total delay time: 3500ms
 */
-module.exports.requestSessionWithRetry = (resolve, reject, retriesLeft, totalDelayMS) =>
+module.exports.requestSessionWithRetry = (resolve, reject, retriesLeft, totalDelayMS) => {
     // api({
     //     host: '',
     //     uri: '/session/'
@@ -62,16 +63,21 @@ module.exports.requestSessionWithRetry = (resolve, reject, retriesLeft, totalDel
     //     }
     //     return resolve(body);
     // });
-    resolve({
+    
+    const accessToken = localStorage.getItem('accessToken');
+    const jwtUser = jwt.decode(accessToken);
+
+    // TODO integrate thumbnailUrl and dateJoined
+    return resolve({
         user: {
-            id: '6449363648f2d902fe086fac',
+            id: jwtUser.userId,
             banned: false,
-            username: 'cybergenios',
+            username: jwtUser.name,
             token: 'b8e578a43bde4a2a922413117104fddb:xqpv7thTPoeCW-RF2NHLvhVxF1I',
-            thumbnailUrl: '//cdn2.scratch.mit.edu/get_image/user/default_32x32.png',
+            thumbnailUrl: 'https://picsum.photos/32',
+            // thumbnailUrl: '//cdn2.scratch.mit.edu/get_image/user/default_32x32.png',
             dateJoined: '2023-01-23T14:20:27',
-            email: 'guilhermetafelli@gmail.com'
-          
+            email: jwtUser.email
         },
         permissions: {
             admin: false,
@@ -84,13 +90,12 @@ module.exports.requestSessionWithRetry = (resolve, reject, retriesLeft, totalDel
             student: false,
             mute_status: {}
         },
-      
         flags: {
             must_reset_password: false,
             must_complete_registration: false,
             has_outstanding_email_confirmation: true,
             show_welcome: true,
-            confirm_email_banner: true,
+            confirm_email_banner: false,
             unsupported_browser_banner: true,
         
             project_comments_enabled: true,
@@ -98,7 +103,8 @@ module.exports.requestSessionWithRetry = (resolve, reject, retriesLeft, totalDel
             userprofile_comments_enabled: true,
             everything_is_totally_normal: false
         }
-    })
+    });
+}
 ;
 
 module.exports.requestSession = (resolve, reject) => (

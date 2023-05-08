@@ -117,40 +117,56 @@ module.exports.handleCompleteRegistration = createProject => (dispatch => {
 });
 
 module.exports.handleLogIn = (formData, callback) => (dispatch => {
+    // dispatch(module.exports.setLoginError(null));
+    // formData.useMessages = true; // NOTE: this may or may not be being used anywhere else
+    // api({
+    //     method: 'post',
+    //     host: '',
+    //     uri: '/accounts/login/',
+    //     json: formData,
+    //     useCsrf: true
+    // }, (err, body) => {
+    //     if (err) dispatch(module.exports.setLoginError(err.message));
+    //     if (body) {
+    //         body = body[0];
+    //         if (body.success) {
+    //             dispatch(module.exports.setLoginOpen(false));
+    //             body.messages.forEach(message => {
+    //                 if (message.message === 'canceled-deletion') {
+    //                     dispatch(module.exports.setCanceledDeletionOpen(true));
+    //                 }
+    //             });
+    //             dispatch(sessionActions.refreshSession());
+    //             callback({success: true});
+    //         } else {
+    //             if (body.redirect) {
+    //                 window.location = body.redirect;
+    //             }
+    //             // Update login error message to a friendlier one if it exists
+    //             dispatch(module.exports.setLoginError(body.msg));
+    //             // JS error already logged by api mixin
+    //             callback({success: false});
+    //         }
+    //     } else {
+    //         // JS error already logged by api mixin
+    //         callback({success: false});
+    //     }
+    // });
+
     dispatch(module.exports.setLoginError(null));
-    formData.useMessages = true; // NOTE: this m ay or may not be being used anywhere else
+    // TODO get host from env
+    // TODO handle error
     api({
         method: 'post',
-        host: '',
-        uri: '/accounts/login/',
-        json: formData,
-        useCsrf: true
+        host: 'https://apiv2.cybergenios.com.br',
+        uri: '/auth',
+        json: formData
+        // useCsrf: true
     }, (err, body) => {
-        if (err) dispatch(module.exports.setLoginError(err.message));
-        if (body) {
-            body = body[0];
-            if (body.success) {
-                dispatch(module.exports.setLoginOpen(false));
-                body.messages.forEach(message => {
-                    if (message.message === 'canceled-deletion') {
-                        dispatch(module.exports.setCanceledDeletionOpen(true));
-                    }
-                });
-                dispatch(sessionActions.refreshSession());
-                callback({success: true});
-            } else {
-                if (body.redirect) {
-                    window.location = body.redirect;
-                }
-                // Update login error message to a friendlier one if it exists
-                dispatch(module.exports.setLoginError(body.msg));
-                // JS error already logged by api mixin
-                callback({success: false});
-            }
-        } else {
-            // JS error already logged by api mixin
-            callback({success: false});
-        }
+        if (err) return;
+        localStorage.setItem('accessToken', body.access_token);
+        localStorage.setItem('refreshToken', body.refresh_token);
+        window.location.reload();
     });
 });
 

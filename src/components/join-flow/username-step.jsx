@@ -49,15 +49,15 @@ class UsernameStep extends React.Component {
         }
 
         // automatically start with focus on username field
-        if (this.usernameInput) this.usernameInput.focus();
+        if (this.emailInput) this.emailInput.focus();
     }
     // track the currently focused input field, to determine whether each field should
     // display a tooltip. (We only display it if a field is focused and has never been touched.)
     handleFocused (fieldName) {
         this.setState({focused: fieldName});
     }
-    handleSetUsernameRef (usernameInputRef) {
-        this.usernameInput = usernameInputRef;
+    handleSetUsernameRef (emailInputRef) {
+        this.emailInput = emailInputRef;
     }
     // simple function to memoize remote requests for usernames
     validateUsernameRemotelyWithCache (username) {

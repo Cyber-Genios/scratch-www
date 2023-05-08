@@ -36,16 +36,16 @@ class Login extends React.Component {
             <div className="login">
                 <Form onSubmit={this.handleSubmit}>
                     <label
-                        htmlFor="username"
-                        key="usernameLabel"
+                        htmlFor="email"
+                        key="emailLabel"
                     >
-                        <FormattedMessage id="general.username" />
+                        <FormattedMessage id="general.emailAddress" />
                     </label>
                     <Input
                         required
-                        key="usernameInput"
+                        key="emailInput"
                         maxLength="30"
-                        name="username"
+                        name="email"
                         type="text"
                     />
                     <label
