@@ -123,11 +123,11 @@ class Navigation extends React.Component {
                             <FormattedMessage id="general.ideas" />
                         </a>
                     </li>
-                    <li className="link about">
+                    {/* <li className="link about">
                         <a href="/about">
                             <FormattedMessage id="general.about" />
                         </a>
-                    </li>
+                    </li> */}
 
                     <li className="search">
                         <Form onSubmit={this.handleSearchSubmit}>
@@ -148,23 +148,23 @@ class Navigation extends React.Component {
                     </li>
                     {this.props.session.status === sessionActions.Status.FETCHED ? (
                         this.props.user ? [
-                            <li
-                                className="link right messages"
-                                key="messages"
-                            >
-                                <a
-                                    href="/messages/"
-                                    title={this.props.intl.formatMessage({id: 'general.messages'})}
-                                >
-                                    <span
-                                        className={classNames({
-                                            'message-count': true,
-                                            'show': this.props.unreadMessageCount > 0
-                                        })}
-                                    >{this.props.unreadMessageCount} </span>
-                                    <FormattedMessage id="general.messages" />
-                                </a>
-                            </li>,
+                            // <li
+                            //     className="link right messages"
+                            //     key="messages"
+                            // >
+                            //     <a
+                            //         href="/messages/"
+                            //         title={this.props.intl.formatMessage({id: 'general.messages'})}
+                            //     >
+                            //         <span
+                            //             className={classNames({
+                            //                 'message-count': true,
+                            //                 'show': this.props.unreadMessageCount > 0
+                            //             })}
+                            //         >{this.props.unreadMessageCount} </span>
+                            //         <FormattedMessage id="general.messages" />
+                            //     </a>
+                            // </li>,
                             <li
                                 className="link right mystuff"
                                 key="mystuff"
@@ -194,20 +194,20 @@ class Navigation extends React.Component {
                                 />
                             </li>
                         ] : [
-                            <li
-                                className="link right join"
-                                key="join"
-                            >
-                                {/* there's no css class registrationLink -- this is
-                                just to make the link findable for testing */}
-                                <a
-                                    className="registrationLink"
-                                    href="#"
-                                    onClick={this.props.handleClickRegistration}
-                                >
-                                    <FormattedMessage id="general.joinScratch" />
-                                </a>
-                            </li>,
+                            // <li
+                            //     className="link right join"
+                            //     key="join"
+                            // >
+                            //     {/* there's no css class registrationLink -- this is
+                            //     just to make the link findable for testing */}
+                            //     <a
+                            //         className="registrationLink"
+                            //         href="#"
+                            //         onClick={this.props.handleClickRegistration}
+                            //     >
+                            //         <FormattedMessage id="general.joinScratch" />
+                            //     </a>
+                            // </li>,
                             <li
                                 className="link right login-item"
                                 key="login"
@@ -241,7 +241,7 @@ class Navigation extends React.Component {
 Navigation.propTypes = {
     accountNavOpen: PropTypes.bool,
     getMessageCount: PropTypes.func,
-    handleClickRegistration: PropTypes.func,
+    // handleClickRegistration: PropTypes.func,
     handleCloseAccountNav: PropTypes.func,
     handleLogOut: PropTypes.func,
     handleToggleAccountNav: PropTypes.func,
@@ -260,7 +260,7 @@ Navigation.propTypes = {
         status: PropTypes.string
     }),
     setMessageCount: PropTypes.func,
-    unreadMessageCount: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+    // unreadMessageCount: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
     useScratch3Registration: PropTypes.bool,
     user: PropTypes.shape({
         classroomId: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),

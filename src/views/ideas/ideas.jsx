@@ -5,9 +5,9 @@ const React = require('react');
 
 const Button = require('../../components/forms/button.jsx');
 const FlexRow = require('../../components/flex-row/flex-row.jsx');
-const MasonryGrid = require('../../components/masonrygrid/masonrygrid.jsx');
+// const MasonryGrid = require('../../components/masonrygrid/masonrygrid.jsx');
 const TitleBanner = require('../../components/title-banner/title-banner.jsx');
-const TTTModal = require('../../components/modal/ttt/modal.jsx');
+// const TTTModal = require('../../components/modal/ttt/modal.jsx');
 const TTTTile = require('../../components/ttt-tile/ttt-tile.jsx');
 
 const Page = require('../../components/page/www/page.jsx');
@@ -110,7 +110,7 @@ class Ideas extends React.Component {
                         </FlexRow>
                     </div>
                 </div>
-                <div className="tips-activity-guides">
+                {/* <div className="tips-activity-guides">
                     <div className="inner">
                         <section className="ttt-section">
                             <div className="ttt-head">
@@ -139,8 +139,8 @@ class Ideas extends React.Component {
                             </a>
                         </section>
                     </div>
-                </div>
-                <div>
+                </div> */}
+                {/* <div>
                     <div className="inner">
                         <FlexRow
                             as="section"
@@ -171,7 +171,7 @@ class Ideas extends React.Component {
                             </div>
                         </FlexRow>
                     </div>
-                </div>
+                </div> */}
                 <div className="inner">
                     <div className="tips-divider" />
                 </div>
@@ -204,7 +204,7 @@ class Ideas extends React.Component {
                         </FlexRow>
                     </div>
                 </div>
-                <div className="gray-area">
+                {/* <div className="gray-area">
                     <div className="inner">
                         <FlexRow
                             as="section"
@@ -245,7 +245,7 @@ class Ideas extends React.Component {
                             </div>
                         </FlexRow>
                     </div>
-                </div>
+                </div> */}
             </div>
         );
     }

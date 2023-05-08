@@ -41,13 +41,13 @@ class Intro extends React.Component {
                             >
                                 {this.props.messages['intro.startCreating']}
                             </a>
-                            <a
+                            {/* <a
                                 className="intro-button join-button button"
                                 href="#"
                                 onClick={this.props.handleClickRegistration}
                             >
                                 {this.props.messages['intro.join']}
-                            </a>
+                            </a> */}
                         </FlexRow>
 
                     </FlexRow>
@@ -78,7 +78,7 @@ class Intro extends React.Component {
                     </FlexRow>
                 </FlexRow>
 
-                <FlexRow className="intro-subnav">
+                {/* <FlexRow className="intro-subnav">
                     <a
                         href="/about"
                     >
@@ -100,14 +100,14 @@ class Intro extends React.Component {
                             {this.props.messages['intro.forEducators']}
                         </div>
                     </a>
-                </FlexRow>
+                </FlexRow> */}
             </TitleBanner>
         );
     }
 }
 
 Intro.propTypes = {
-    handleClickRegistration: PropTypes.func,
+    // handleClickRegistration: PropTypes.func,
     messages: PropTypes.shape({
         'intro.aboutScratch': PropTypes.string,
         'intro.forEducators': PropTypes.string,

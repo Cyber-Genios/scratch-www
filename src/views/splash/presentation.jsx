@@ -32,7 +32,7 @@ const RemixProjectMessage = require('./activity-rows/remix-project.jsx');
 const ShareProjectMessage = require('./activity-rows/share-project.jsx');
 
 // Banner Components
-const DonateBanner = require('./donate/donate-banner.jsx');
+// const DonateBanner = require('./donate/donate-banner.jsx');
 const HOCTopBanner = require('./hoc/top-banner.jsx');
 const HOCMiddleBanner = require('./hoc/middle-banner.jsx');
 
@@ -367,13 +367,13 @@ class SplashPresentation extends React.Component { // eslint-disable-line react/
                         messages={messages}
                     />
                 ] : []}
-                {
+                {/* {
                     this.props.shouldShowDonateBanner && (
                         <DonateBanner
                             onRequestClose={this.props.onCloseDonateBanner}
                         />
                     )
-                }
+                } */}
                 {
                     this.props.shouldShowHOCTopBanner && (
                         <MediaQuery
@@ -532,14 +532,14 @@ SplashPresentation.propTypes = {
     lovedByFollowing: PropTypes.arrayOf(PropTypes.object),
     news: PropTypes.arrayOf(PropTypes.object),
     onCloseAdminPanel: PropTypes.func.isRequired,
-    onCloseDonateBanner: PropTypes.func.isRequired,
+    // onCloseDonateBanner: PropTypes.func.isRequired,
     onDismiss: PropTypes.func.isRequired,
     onOpenAdminPanel: PropTypes.func.isRequired,
     onRefreshHomepageCache: PropTypes.func.isRequired,
     refreshCacheStatus: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
     sessionStatus: PropTypes.string.isRequired,
     sharedByFollowing: PropTypes.arrayOf(PropTypes.object),
-    shouldShowDonateBanner: PropTypes.bool.isRequired,
+    // shouldShowDonateBanner: PropTypes.bool.isRequired,
     shouldShowEmailConfirmation: PropTypes.bool.isRequired,
     shouldShowHOCTopBanner: PropTypes.bool.isRequired,
     shouldShowIntro: PropTypes.bool.isRequired,

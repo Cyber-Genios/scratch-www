@@ -10,6 +10,8 @@
 }
 
 .splash {
+    min-height: calc(100vh - 64px);
+
     .splash-header {
         display: flex;
         flex-direction: row;

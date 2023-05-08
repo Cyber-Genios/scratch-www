@@ -3,8 +3,8 @@ const PropTypes = require('prop-types');
 const React = require('react');
 
 const Navigation = require('../../navigation/www/navigation.jsx');
-const Footer = require('../../footer/www/footer.jsx');
-const DonorRecognition = require('./donor-recognition.jsx');
+// const Footer = require('../../footer/www/footer.jsx');
+// const DonorRecognition = require('./donor-recognition.jsx');
 const ErrorBoundary = require('../../errorboundary/errorboundary.jsx');
 
 const today = new Date();
@@ -12,8 +12,8 @@ const semi = today.getDate() === 1 && today.getMonth() === 3;
 
 const Page = ({
     children,
-    className,
-    showDonorRecognition
+    className
+    // showDonorRecognition
 }) => (
     <ErrorBoundary componentName="Page">
         <div className={classNames('page', className)}>
@@ -25,17 +25,20 @@ const Page = ({
             >
                 <Navigation />
             </nav>
-            <main id="view">
+            <main
+                id="view"
+                style={{minHeight: 'calc(100vh - 64px)'}}
+            >
                 {children}
             </main>
-            <footer id="footer">
+            {/* <footer id="footer">
                 <Footer />
             </footer>
             {showDonorRecognition &&
                 <aside id="donor">
                     <DonorRecognition />
                 </aside>
-            }
+            } */}
         </div>
         {semi && <div style={{color: '#fff'}}>{';'}</div>}
     </ErrorBoundary>
@@ -43,8 +46,8 @@ const Page = ({
 
 Page.propTypes = {
     children: PropTypes.node,
-    className: PropTypes.string,
-    showDonorRecognition: PropTypes.bool
+    className: PropTypes.string
+    // showDonorRecognition: PropTypes.bool
 };
 
 module.exports = Page;

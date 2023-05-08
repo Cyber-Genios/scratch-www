@@ -68,7 +68,7 @@ module.exports.requestSessionWithRetry = (resolve, reject, retriesLeft, totalDel
     const jwtUser = jwt.decode(accessToken);
 
     // TODO integrate thumbnailUrl and dateJoined
-    return resolve({
+    return resolve(jwtUser ? {
         user: {
             id: jwtUser.userId,
             banned: false,
@@ -98,6 +98,13 @@ module.exports.requestSessionWithRetry = (resolve, reject, retriesLeft, totalDel
             confirm_email_banner: false,
             unsupported_browser_banner: true,
         
+            project_comments_enabled: true,
+            gallery_comments_enabled: true,
+            userprofile_comments_enabled: true,
+            everything_is_totally_normal: false
+        }
+    } : {
+        flags: {
             project_comments_enabled: true,
             gallery_comments_enabled: true,
             userprofile_comments_enabled: true,
