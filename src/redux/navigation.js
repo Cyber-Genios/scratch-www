@@ -154,11 +154,10 @@ module.exports.handleLogIn = (formData, callback) => (dispatch => {
     // });
 
     dispatch(module.exports.setLoginError(null));
-    // TODO get host from env
     // TODO handle error
     api({
         method: 'post',
-        host: 'https://apiv2.cybergenios.com.br',
+        host: process.env.API_URL,
         uri: '/auth',
         json: formData
         // useCsrf: true
@@ -187,11 +186,9 @@ module.exports.handleLogOut = () => (() => {
     //     form.submit();
     // });
 
-    
-    // TODO get host from env
     api({
         method: 'post',
-        host: 'https://apiv2.cybergenios.com.br',
+        host: process.env.API_URL,
         uri: '/auth/logout',
         json: {refreshToken: localStorage.getItem('refreshToken')}
     }, () => {

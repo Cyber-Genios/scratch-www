@@ -66,7 +66,12 @@ class Navigation extends React.Component {
     }
     getProfileUrl () {
         if (!this.props.user) return;
-        return `/users/${this.props.user.username}/`;
+        const accessToken = localStorage.getItem('accessToken');
+        const refreshToken = localStorage.getItem('refreshToken');
+        const tokenQuery = accessToken ? `?accessToken=${accessToken}&refreshToken=${refreshToken}` : '';
+
+        return `${process.env.CUSTOMER_URL}/profile?${tokenQuery}`;
+        // return `/users/${this.props.user.username}/`;
     }
 
     pollForMessages (ms) {
@@ -170,7 +175,7 @@ class Navigation extends React.Component {
                                 key="mystuff"
                             >
                                 <a
-                                    href="/mystuff/"
+                                    href={`${process.env.CUSTOMER_URL}/mystuff?accessToken=${localStorage.getItem('accessToken')}&refreshToken=${localStorage.getItem('refreshToken')}`}
                                     title={this.props.intl.formatMessage({id: 'general.myStuff'})}
                                 >
                                     <FormattedMessage id="general.myStuff" />
@@ -265,7 +270,8 @@ Navigation.propTypes = {
     user: PropTypes.shape({
         classroomId: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
         thumbnailUrl: PropTypes.string,
-        username: PropTypes.string
+        username: PropTypes.string,
+        id: PropTypes.string
     })
 };
 

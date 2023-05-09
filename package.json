@@ -3,7 +3,7 @@
   "version": "1.0.3",
   "description": "Standalone WWW client for Scratch",
   "scripts": {
-    "start": "export NODE_OPTIONS=--openssl-legacy-provider && PROJECT_HOST=https://apiv2.cybergenios.com.br/scratch/api API_HOST=https://apiv2.cybergenios.com.br/scratch/api ASSET_HOST=https://apiv2.cybergenios.com.br/scratch/assets node ./dev-server/index.js",
+    "start": "export NODE_OPTIONS=--openssl-legacy-provider && PROJECT_HOST=https://apiv2.cybergenios.com.br/scratch/api API_HOST=https://apiv2.cybergenios.com.br/scratch/api ASSET_HOST=https://apiv2.cybergenios.com.br/scratch/assets CUSTOMER_URL=https://cybergenios-customer-qa.netlify.app API_URL=https://apiv2.cybergenios.com.br node ./dev-server/index.js",
     "test": "npm run test:lint && npm run build && npm run test:unit",
     "test:lint": "eslint . --ext .js,.jsx,.json",
     "test:lint:ci": "eslint . --ext .js,.jsx,.json --format junit -o ./test/results/lint-results.xml",
@@ -44,7 +44,7 @@
   },
   "homepage": "https://github.com/llk/scratch-www#readme",
   "dependencies": {
-    "@cybergenios/scratch-gui": "^1.8.23",
+    "@cybergenios/scratch-gui": "^1.8.30",
     "bunyan": "1.8.15",
     "clipboard-copy": "2.0.1",
     "express": "4.16.1",

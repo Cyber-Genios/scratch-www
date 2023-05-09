@@ -51,7 +51,7 @@ const AccountNav = ({
                 </a>
             </li>
             <li>
-                <a href="/mystuff/">
+                <a href={`${process.env.CUSTOMER_URL}/mystuff?accessToken=${localStorage.getItem('accessToken')}&refreshToken=${localStorage.getItem('refreshToken')}`}>
                     <FormattedMessage id="general.myStuff" />
                 </a>
             </li>
@@ -69,11 +69,11 @@ const AccountNav = ({
                     </a>
                 </li>
             ] : []}
-            <li>
+            {/* <li>
                 <a href="/accounts/settings/">
                     <FormattedMessage id="general.accountSettings" />
                 </a>
-            </li>
+            </li> */}
             <li className="divider">
                 <a
                     href="#"

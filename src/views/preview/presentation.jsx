@@ -128,6 +128,7 @@ const PreviewPresentation = ({
     showCloudDataAndVideoAlert,
     showUsernameBlockAlert,
     projectHost,
+    customerUrl,
     projectId,
     projectInfo,
     projectStudios,
@@ -367,6 +368,7 @@ const PreviewPresentation = ({
                                     isFullScreen={isFullScreen}
                                     previewInfoVisible="false"
                                     projectHost={projectHost}
+                                    customerUrl={customerUrl}
                                     projectToken={projectInfo.project_token}
                                     projectId={projectId}
                                     onGreenFlag={onGreenFlag}
@@ -785,6 +787,7 @@ PreviewPresentation.propTypes = {
     originalInfo: projectShape,
     parentInfo: projectShape,
     projectHost: PropTypes.string,
+    customerUrl: PropTypes.string,
     projectId: PropTypes.string,
     projectInfo: projectShape,
     projectStudios: PropTypes.arrayOf(PropTypes.object),

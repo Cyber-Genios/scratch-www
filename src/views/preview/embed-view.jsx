@@ -49,6 +49,7 @@ class EmbedView extends React.Component {
                         projectId={this.state.projectId}
                         projectTitle={this.props.projectInfo.title}
                         projectToken={this.props.projectInfo.project_token}
+                        customerUrl={this.props.customerUrl}
                     />
                 </React.Fragment>
             );
@@ -61,13 +62,15 @@ EmbedView.propTypes = {
     assetHost: PropTypes.string.isRequired,
     getProjectInfo: PropTypes.func.isRequired,
     projectHost: PropTypes.string.isRequired,
+    customerUrl: PropTypes.string.isRequired,
     projectInfo: projectShape,
     projectNotAvailable: PropTypes.bool
 };
 
 EmbedView.defaultProps = {
     assetHost: process.env.ASSET_HOST,
-    projectHost: process.env.PROJECT_HOST
+    projectHost: process.env.PROJECT_HOST,
+    customerUrl: process.env.CUSTOMER_URL
 };
 
 const mapStateToProps = state => ({

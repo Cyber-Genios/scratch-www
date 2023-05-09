@@ -7,7 +7,7 @@ const React = require('react');
 
 const frameless = require('../../lib/frameless');
 const intlShape = require('../../lib/intl-shape');
-const sessionActions = require('../../redux/session.js');
+// const sessionActions = require('../../redux/session.js');
 // const shuffle = require('../../lib/shuffle.js').shuffle; required for community rows
 
 const AdminPanel = require('../../components/adminpanel/adminpanel.jsx');
@@ -17,9 +17,9 @@ const Carousel = require('../../components/carousel/carousel.jsx');
 const EmailConfirmationBanner = require('../../components/dropdown-banner/email-confirmation/banner.jsx');
 const Intro = require('../../components/intro/intro.jsx');
 const LegacyCarousel = require('../../components/carousel/legacy-carousel.jsx');
-const News = require('../../components/news/news.jsx');
+// const News = require('../../components/news/news.jsx');
 const TeacherBanner = require('../../components/teacher-banner/teacher-banner.jsx');
-const Welcome = require('../../components/welcome/welcome.jsx');
+// const Welcome = require('../../components/welcome/welcome.jsx');
 
 // Activity Components
 const BecomeCuratorMessage = require('./activity-rows/become-curator.jsx');
@@ -193,7 +193,7 @@ ActivityList.propTypes = {
     items: PropTypes.arrayOf(PropTypes.object)
 };
 
-const WrappedActivityList = injectIntl(ActivityList);
+// const WrappedActivityList = injectIntl(ActivityList);
 
 // Splash page
 class SplashPresentation extends React.Component { // eslint-disable-line react/no-multi-comp
@@ -396,7 +396,7 @@ class SplashPresentation extends React.Component { // eslint-disable-line react/
                     className="inner mod-splash"
                     key="inner"
                 >
-                    {
+                    {/* {
                         this.props.sessionStatus === sessionActions.Status.FETCHED &&
                         Object.keys(this.props.user).length > 0 && // user is logged in
                         <div
@@ -422,7 +422,7 @@ class SplashPresentation extends React.Component { // eslint-disable-line react/
                                 messages={messages}
                             />
                         </div>
-                    }
+                    } */}
                     {featured.shift()}
                     {featured.shift()}
                 </div>
@@ -515,7 +515,7 @@ class SplashPresentation extends React.Component { // eslint-disable-line react/
 }
 
 SplashPresentation.propTypes = {
-    activity: PropTypes.arrayOf(PropTypes.object),
+    // activity: PropTypes.arrayOf(PropTypes.object),
     adminPanelOpen: PropTypes.bool,
     featuredGlobal: PropTypes.shape({
         community_featured_projects: PropTypes.array,
@@ -530,22 +530,22 @@ SplashPresentation.propTypes = {
     isAdmin: PropTypes.bool.isRequired,
     isEducator: PropTypes.bool.isRequired,
     lovedByFollowing: PropTypes.arrayOf(PropTypes.object),
-    news: PropTypes.arrayOf(PropTypes.object),
+    // news: PropTypes.arrayOf(PropTypes.object),
     onCloseAdminPanel: PropTypes.func.isRequired,
     // onCloseDonateBanner: PropTypes.func.isRequired,
     onDismiss: PropTypes.func.isRequired,
     onOpenAdminPanel: PropTypes.func.isRequired,
     onRefreshHomepageCache: PropTypes.func.isRequired,
     refreshCacheStatus: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
-    sessionStatus: PropTypes.string.isRequired,
+    // sessionStatus: PropTypes.string.isRequired,
     sharedByFollowing: PropTypes.arrayOf(PropTypes.object),
     // shouldShowDonateBanner: PropTypes.bool.isRequired,
     shouldShowEmailConfirmation: PropTypes.bool.isRequired,
     shouldShowHOCTopBanner: PropTypes.bool.isRequired,
     shouldShowIntro: PropTypes.bool.isRequired,
-    shouldShowHOCMiddleBanner: PropTypes.bool.isRequired,
-    shouldShowWelcome: PropTypes.bool.isRequired,
-    user: PropTypes.object.isRequired // eslint-disable-line react/forbid-prop-types
+    shouldShowHOCMiddleBanner: PropTypes.bool.isRequired
+    // shouldShowWelcome: PropTypes.bool.isRequired,
+    // user: PropTypes.object.isRequired // eslint-disable-line react/forbid-prop-types
 };
 
 SplashPresentation.defaultProps = {
