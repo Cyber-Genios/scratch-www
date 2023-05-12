@@ -489,7 +489,7 @@ module.exports.setLovedStatusViaProxy = (loved, id, userId, token) => (dispatch 
         });
     } else {
         api({
-            uri: `/proxy/projects/${id}/loves/user/${username}`,
+            uri: `/proxy/projects/${id}/loves/user/${userId}`,
             authentication: token,
             // withcredentials: true,
             method: 'DELETE',
