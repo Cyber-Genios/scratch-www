@@ -219,13 +219,13 @@ class Preview extends React.Component {
     }
     fetchCommunityData () {
         if (this.props.userPresent) {
-            const username = this.props.user.username;
+            const userId = this.props.user.id;
             const token = this.props.user.token;
             this.props.getProjectInfo(this.state.projectId, token);
             this.props.getRemixes(this.state.projectId, token);
-            this.props.getCuratedStudios(username);
-            this.props.getFavedStatus(this.state.projectId, username, token);
-            this.props.getLovedStatus(this.state.projectId, username, token);
+            this.props.getCuratedStudios(userId);
+            this.props.getFavedStatus(this.state.projectId, userId, token);
+            this.props.getLovedStatus(this.state.projectId, userId, token);
         } else {
             this.props.getProjectInfo(this.state.projectId);
             this.props.getRemixes(this.state.projectId);
@@ -553,7 +553,7 @@ class Preview extends React.Component {
         this.props.setFavedStatus(
             !this.props.faved,
             this.props.projectInfo.id,
-            this.props.user.username,
+            this.props.user.id,
             this.props.user.token
         );
         if (this.props.faved) {
@@ -1163,20 +1163,20 @@ const mapDispatchToProps = dispatch => ({
     getMoreReplies: (projectId, commentId, offset, ownerUsername, isAdmin, token) => {
         dispatch(projectCommentActions.getReplies(projectId, [commentId], offset, ownerUsername, isAdmin, token));
     },
-    getFavedStatus: (id, username, token) => {
-        dispatch(previewActions.getFavedStatus(id, username, token));
+    getFavedStatus: (id, userId, token) => {
+        dispatch(previewActions.getFavedStatus(id, userId, token));
     },
-    setFavedStatus: (faved, id, username, token) => {
-        dispatch(previewActions.setFavedStatusViaProxy(faved, id, username, token));
+    setFavedStatus: (faved, id, userId, token) => {
+        dispatch(previewActions.setFavedStatusViaProxy(faved, id, userId, token));
     },
-    getLovedStatus: (id, username, token) => {
-        dispatch(previewActions.getLovedStatus(id, username, token));
+    getLovedStatus: (id, userId, token) => {
+        dispatch(previewActions.getLovedStatus(id, userId, token));
     },
     logProjectView: (id, authorUsername, token) => {
         dispatch(previewActions.logProjectView(id, authorUsername, token));
     },
-    setLovedStatus: (loved, id, username, token) => {
-        dispatch(previewActions.setLovedStatusViaProxy(loved, id, username, token));
+    setLovedStatus: (loved, id, userId, token) => {
+        dispatch(previewActions.setLovedStatusViaProxy(loved, id, userId, token));
     },
     shareProject: (id, token) => {
         dispatch(previewActions.shareProject(id, token));

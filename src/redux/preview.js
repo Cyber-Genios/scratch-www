@@ -292,10 +292,10 @@ module.exports.getParentInfo = id => (dispatch => {
     });
 });
 
-module.exports.getFavedStatus = (id, username, token) => (dispatch => {
+module.exports.getFavedStatus = (id, userId, token) => (dispatch => {
     dispatch(module.exports.setFetchStatus('faved', module.exports.Status.FETCHING));
     api({
-        uri: `/projects/${id}/favorites/user/${username}`,
+        uri: `/projects/${id}/favorites/user/${userId}`,
         method: 'POST' // should be GET
         // authentication: token
     }, (err, body) => {
@@ -317,11 +317,11 @@ module.exports.getFavedStatus = (id, username, token) => (dispatch => {
     // dispatch(module.exports.setFaved(body.userFavorite));
 });
 
-module.exports.setFavedStatus = (faved, id, username, token) => (dispatch => {
+module.exports.setFavedStatus = (faved, id, userId, token) => (dispatch => {
     dispatch(module.exports.setFetchStatus('faved', module.exports.Status.FETCHING));
     if (faved) {
         api({
-            uri: `/projects/${id}/favorites/user/${username}`,
+            uri: `/projects/${id}/favorites/user/${userId}`,
             // authentication: token,
             method: 'POST'
         }, (err, body) => {
@@ -338,7 +338,7 @@ module.exports.setFavedStatus = (faved, id, username, token) => (dispatch => {
         });
     } else {
         api({
-            uri: `/projects/${id}/favorites/user/${username}`,
+            uri: `/projects/${id}/favorites/user/${userId}`,
             // authentication: token,
             method: 'DELETE'
         }, (err, body) => {
@@ -356,11 +356,11 @@ module.exports.setFavedStatus = (faved, id, username, token) => (dispatch => {
     }
 });
 
-module.exports.setFavedStatusViaProxy = (faved, id, username, token) => (dispatch => {
+module.exports.setFavedStatusViaProxy = (faved, id, userId, token) => (dispatch => {
     dispatch(module.exports.setFetchStatus('faved', module.exports.Status.FETCHING));
     if (faved) {
         api({
-            uri: `/proxy/projects/${id}/favorites/user/${username}`,
+            uri: `/proxy/projects/${id}/favorites/user/${userId}`,
             // authentication: token,
             // withcredentials: true,
             method: 'POST',
@@ -380,7 +380,7 @@ module.exports.setFavedStatusViaProxy = (faved, id, username, token) => (dispatc
         });
     } else {
         api({
-            uri: `/proxy/projects/${id}/favorites/user/${username}`,
+            uri: `/proxy/projects/${id}/favorites/user/${userId}`,
             authentication: token,
             // withcredentials: true,
             method: 'DELETE',
@@ -401,10 +401,10 @@ module.exports.setFavedStatusViaProxy = (faved, id, username, token) => (dispatc
     }
 });
 
-module.exports.getLovedStatus = (id, username, token) => (dispatch => {
+module.exports.getLovedStatus = (id, userId, token) => (dispatch => {
     dispatch(module.exports.setFetchStatus('loved', module.exports.Status.FETCHING));
     api({
-        uri: `/projects/${id}/loves/user/${username}`,
+        uri: `/projects/${id}/loves/user/${userId}`,
         method: 'POST' // should be GET
         // authentication: token
     }, (err, body) => {
@@ -426,11 +426,11 @@ module.exports.getLovedStatus = (id, username, token) => (dispatch => {
     // dispatch(module.exports.setLoved(body.userLove));
 });
 
-module.exports.setLovedStatus = (loved, id, username, token) => (dispatch => {
+module.exports.setLovedStatus = (loved, id, userId, token) => (dispatch => {
     dispatch(module.exports.setFetchStatus('loved', module.exports.Status.FETCHING));
     if (loved) {
         api({
-            uri: `/projects/${id}/loves/user/${username}`,
+            uri: `/projects/${id}/loves/user/${userId}`,
             // authentication: token,
             method: 'POST'
         }, (err, body) => {
@@ -447,7 +447,7 @@ module.exports.setLovedStatus = (loved, id, username, token) => (dispatch => {
         });
     } else {
         api({
-            uri: `/projects/${id}/loves/user/${username}`,
+            uri: `/projects/${id}/loves/user/${userId}`,
             // authentication: token,
             method: 'DELETE'
         }, (err, body) => {
@@ -465,11 +465,11 @@ module.exports.setLovedStatus = (loved, id, username, token) => (dispatch => {
     }
 });
 
-module.exports.setLovedStatusViaProxy = (loved, id, username, token) => (dispatch => {
+module.exports.setLovedStatusViaProxy = (loved, id, userId, token) => (dispatch => {
     dispatch(module.exports.setFetchStatus('loved', module.exports.Status.FETCHING));
     if (loved) {
         api({
-            uri: `/proxy/projects/${id}/loves/user/${username}`,
+            uri: `/proxy/projects/${id}/loves/user/${userId}`,
             authentication: token,
             // withcredentials: true,
             method: 'POST',
