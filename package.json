@@ -44,7 +44,7 @@
   },
   "homepage": "https://github.com/llk/scratch-www#readme",
   "dependencies": {
-    "@cybergenios/scratch-gui": "^1.8.30",
+    "scratch-gui": "3.2.37",
     "bunyan": "1.8.15",
     "clipboard-copy": "2.0.1",
     "express": "4.16.1",
