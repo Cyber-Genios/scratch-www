@@ -11,6 +11,6 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Install modules
-        run: npm i
+        run: npm i --openssl-legacy-provider
       - name: Build modules
-        run: npm run build
+        run: npm run build --openssl-legacy-provider
