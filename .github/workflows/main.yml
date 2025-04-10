@@ -12,5 +12,9 @@ jobs:
       - uses: actions/checkout@v2
       - name: Install modules
         run: npm i --openssl-legacy-provider
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 16
       - name: Build modules
         run: npm run build --openssl-legacy-provider
