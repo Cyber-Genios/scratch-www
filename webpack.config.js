@@ -233,7 +233,7 @@ module.exports = {
             'process.env.STATIC_HOST': '"' + (process.env.STATIC_HOST || 'https://uploads.scratch.mit.edu') + '"',
             'process.env.SCRATCH_ENV': '"' + (process.env.SCRATCH_ENV || 'development') + '"',
             'process.env.CUSTOMER_URL': '"' + (process.env.CUSTOMER_URL || 'https://cybergenios-customer-qa.netlify.app') + '"',
-            'process.env.API_URL': '"' + (process.env.API_URL || 'https://apiv2.cybergenios.com.br') + '"'
+            'process.env.API_URL': '"' + (process.env.API_URL || 'https://api-staging.cybergenios.com.br/scratch/') + '"'
         })
     ])
         .concat(process.env.ANALYZE_BUNDLE === 'true' ? [
