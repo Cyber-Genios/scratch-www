@@ -83,20 +83,6 @@ module.exports = {
     module: {
         rules: [
             {
-                test: /\.mjs$/,
-                include: /node_modules\/react-confetti/,
-                type: 'javascript/auto',
-                use: {
-                  loader: 'babel-loader',
-                  options: {
-                    presets: [
-                      ['@babel/preset-env', { targets: 'defaults' }],
-                      '@babel/preset-react'
-                    ],
-                  },
-                },
-            },
-            {
                 test: /\.jsx?$/,
                 loader: 'babel-loader',
                 include: [

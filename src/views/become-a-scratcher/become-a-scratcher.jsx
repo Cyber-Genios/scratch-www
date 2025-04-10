@@ -1,7 +1,7 @@
 /* eslint-disable react/jsx-no-bind */
 import React, {useState, useEffect} from 'react';
 import useWindowSize from 'react-use/lib/useWindowSize';
-import Confetti from 'react-confetti';
+// import Confetti from 'react-confetti';
 import {FormattedMessage, injectIntl} from 'react-intl';
 import PropTypes from 'prop-types';
 
@@ -498,23 +498,23 @@ const BecomeAScratcher = ({user, invitedScratcher, scratcher, sessionStatus}) =>
             return (<div className="onboarding col">
                 <div className="hooray-screen">
                     <div className={`hooray-confetti ${hoorayAppear && 'hooray-disappear'}`}>
-                        {showConfetti && confettiPaths.map(confettiPath =>
-                            (<Confetti
-                                key={confettiPath.toString()}
-                                colors={['#0FBD8C', '#4C97FF', '#FFBF00', '#FF6680']}
-                                gravity={.08}
-                                width={width}
-                                height={height}
-                                friction={.9999}
-                                numberOfPieces={45}
-                                initialVelocityY={-10}
-                                initialVelocityX={1}
-                                drawShape={ctx => {
-                                    ctx.scale(.5, .5);
-                                    ctx.translate(-30, -30);
-                                    ctx.fill(confettiPath);
-                                }}
-                            />)
+                        {showConfetti && confettiPaths.map(confettiPath =>(<></>)
+                            // (<Confetti
+                            //     key={confettiPath.toString()}
+                            //     colors={['#0FBD8C', '#4C97FF', '#FFBF00', '#FF6680']}
+                            //     gravity={.08}
+                            //     width={width}
+                            //     height={height}
+                            //     friction={.9999}
+                            //     numberOfPieces={45}
+                            //     initialVelocityY={-10}
+                            //     initialVelocityX={1}
+                            //     drawShape={ctx => {
+                            //         ctx.scale(.5, .5);
+                            //         ctx.translate(-30, -30);
+                            //         ctx.fill(confettiPath);
+                            //     }}
+                            // />)
                         )}
                     </div>
                     <h1><FormattedMessage id={'becomeAScratcher.success.header'} /></h1>
